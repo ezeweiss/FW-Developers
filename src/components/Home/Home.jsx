@@ -1,132 +1,175 @@
-import React from 'react';
-import { Container, Typography, Box, Button, Grid, Card, CardContent, CardMedia } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, Button } from '@mui/material';
+import Typewriter from 'typewriter-effect';
+import Projects from '../Projects/Projects';
+import Contact from '../Contact/Contact';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 
 const Home = () => {
+  const [showScrollButton, setShowScrollButton] = useState(false);
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Detectar el scroll para mostrar u ocultar el botón
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 100) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Limpiar el evento al desmontar el componente
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <Container>
-      <Box sx={{ textAlign: 'center', mt: 4 }}>
-        <Typography variant="h3" gutterBottom>Bienvenidos a FW Developers</Typography>
-        <Typography variant="h5" gutterBottom>
+    <Box
+      sx={{
+        backgroundColor: 'black',
+        color: 'white',
+        minHeight: '100vh',
+        overflowX: 'hidden',
+        scrollBehavior: 'smooth',
+      }}
+    >
+      {/* Sección de Bienvenida */}
+      <Box
+        id="inicio"
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          padding: 4,
+          backgroundColor: '#212121', // Fondo oscuro para la sección de bienvenida
+        }}
+      >
+        <Typography variant="h3" gutterBottom sx={{ animation: 'fadeIn 2s' }}>
+          <Typewriter
+            onInit={(typewriter) => {
+              typewriter
+                .typeString("¡Bienvenidos a FW Developers!")
+                .start();
+            }}
+          />
+        </Typography>
+        <Typography
+          variant="h5"
+          gutterBottom
+          sx={{
+            maxWidth: '600px',
+            animation: 'fadeIn 3s',
+            opacity: 0.9,
+          }}
+        >
           Somos un grupo dedicado a la creación de soluciones tecnológicas innovadoras.
         </Typography>
         <Box sx={{ mt: 2 }}>
-          <Button variant="contained" color="primary" component={Link} to="/about-us">Conoce Más</Button>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => scrollToSection('proyectos')}
+            sx={{
+              animation: 'fadeInUp 2s',
+              transition: 'all 0.3s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.1)',
+              },
+            }}
+          >
+            Ver Proyectos
+          </Button>
         </Box>
       </Box>
-      
-      <Box sx={{ mt: 6 }}>
-        <Typography variant="h4" gutterBottom>Servicios Ofrecidos</Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo Web"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/hombre-sentado-silla-escribiendo-portatil_23-2148113980.jpg?t=st=1721233482~exp=1721237082~hmac=a212e2ba9fd06539938d34db03b7846ad641d1ef8246ac3a57230cb12c3fc765&w=1380"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Desarrollo Web</Typography>
-                <Typography variant="body1">Creamos aplicaciones web robustas y escalables.</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo móvil"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/mujer-smartphone-playa_23-2148801482.jpg?t=st=1721233894~exp=1721237494~hmac=c4d1e7693a2fdd09acaa28038b6eee64bd6db429523a957f3619233b903c7084&w=826"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Desarrollo Móvil</Typography>
-                <Typography variant="body1">Desarrollamos aplicaciones móviles para Android y iOS.</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo móvil"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/gente-negocios-dandose-mano_53876-13391.jpg?t=st=1721233632~exp=1721237232~hmac=0e4435316a101b532c10c0ed4d26e4c5725c7e1cba8a9dcba5ee389895dd5244&w=1380"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Consultoría</Typography>
-                <Typography variant="body1">Ofrecemos consultoría tecnológica para optimizar tus procesos.</Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-      
-      <Box sx={{ mt: 6 }}>
-        <Typography variant="h4" gutterBottom>Proyectos Destacados</Typography>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo móvil"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/camara-fotos-vintage-vista-superior-fondo-colorido_23-2148300550.jpg?t=st=1721234020~exp=1721237620~hmac=9ec72672ed455a1ccbd12477e2278f1bbf06a3dff7a4438452f9e62bf067ebca&w=1380"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Proyecto 1</Typography>
-                <Typography variant="body1">Descripción breve del proyecto 1.</Typography>
-                <Button variant="outlined" color="primary" component={Link} to="/projects">Ver Más</Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo móvil"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/camara-fotos-vintage-vista-superior-fondo-colorido_23-2148300550.jpg?t=st=1721234020~exp=1721237620~hmac=9ec72672ed455a1ccbd12477e2278f1bbf06a3dff7a4438452f9e62bf067ebca&w=1380"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Proyecto 2</Typography>
-                <Typography variant="body1">Descripción breve del proyecto 2.</Typography>
-                <Button variant="outlined" color="primary" component={Link} to="/projects">Ver Más</Button>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Card>
-                <CardMedia
-                    component="img"
-                    alt="Desarrollo móvil"
-                    height="140"
-                    image="https://img.freepik.com/foto-gratis/camara-fotos-vintage-vista-superior-fondo-colorido_23-2148300550.jpg?t=st=1721234020~exp=1721237620~hmac=9ec72672ed455a1ccbd12477e2278f1bbf06a3dff7a4438452f9e62bf067ebca&w=1380"
-                />
-              <CardContent>
-                <Typography variant="h5" gutterBottom>Proyecto 3</Typography>
-                <Typography variant="body1">Descripción breve del proyecto 3.</Typography>
-                <Button variant="outlined" color="primary" component={Link} to="/projects">Ver Más</Button>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-      </Box>
-      
-      <Box sx={{ mt: 6, textAlign: 'center' }}>
-        <Typography variant="h4" gutterBottom>Testimonios</Typography>
-        <Typography variant="body1" gutterBottom>
-          "Trabajar con Mi Grupo de Desarrollo ha sido una experiencia increíble. Sus soluciones han mejorado significativamente nuestro negocio."
+
+      {/* Sección de Proyectos */}
+      <Box
+        id="proyectos"
+        sx={{
+          minHeight: '100vh',
+          padding: 4,
+          backgroundColor: '#f4f4f4', // Fondo claro para la sección de proyectos
+          color: 'black',
+        }}
+      >
+        <Typography variant="h3" gutterBottom align="center">
+          Mis Proyectos
         </Typography>
-        <Typography variant="body1" gutterBottom>- Cliente Satisfecho</Typography>
+        <Typography variant="body1" align="center" sx={{ mb: 3 }}>
+          Estos son algunos de los proyectos más destacados en los que hemos trabajado:
+        </Typography>
+        <Projects />
       </Box>
-      
-      <Box sx={{ mt: 6, textAlign: 'center' }}>
-        <Button variant="contained" color="primary" component={Link} to="/contact">Contáctanos</Button>
+
+      {/* Sección de Contacto */}
+      <Box
+        id="contacto"
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',  // Fondo oscuro con opacidad
+          color: 'white',
+          textAlign: 'center',
+          padding: 4,
+        }}
+      >
+        <Typography variant="h3" gutterBottom>
+          Contáctanos
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            maxWidth: '600px',
+            marginBottom: 3,
+            opacity: 0.8,
+          }}
+        >
+          Si tienes alguna idea o proyecto en mente, no dudes en escribirnos. ¡Estamos aquí para ayudarte!
+        </Typography>
+        <Contact />
       </Box>
-    </Container>
+
+      {/* Flecha hacia arriba (solo se muestra si se ha desplazado hacia abajo) */}
+      {showScrollButton && (
+        <Box
+          sx={{
+            position: 'fixed',
+            bottom: 30,
+            right: 30,
+            backgroundColor: 'cornflowerblue',
+            borderRadius: '50%',
+            padding: 2,
+            cursor: 'pointer',
+            zIndex: 100,
+            '&:hover': {
+              backgroundColor: '#0056b3',
+            },
+          }}
+          onClick={scrollToTop}
+        >
+          <ArrowUpwardIcon sx={{ color: 'white' }} />
+        </Box>
+      )}
+    </Box>
   );
-}
+};
 
 export default Home;
