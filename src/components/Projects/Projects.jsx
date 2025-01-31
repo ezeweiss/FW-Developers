@@ -8,28 +8,28 @@ const proyectosData = [
     id: 1,
     titulo: "MG Pinos",
     descripcion: "Tienda en línea construida con React y Firebase.",
-    imagen: "src/assets/img/mgpinos.jpg",
+    imagen: "/img/mgpinos.jpg",
     enlace: "https://www.mgpinos.com.ar/",
   },
   {
     id: 2,
     titulo: "Vidrios CHB",
     descripcion: "Blog personal con Next.js y contenido dinámico.",
-    imagen: "src/assets/img/chb.png",
+    imagen: "/img/chb.png",
     enlace: "https://www.vidrioschb.com.ar/",
   },
   {
     id: 3,
     titulo: "Portafolio Personal",
     descripcion: "Mi portafolio hecho con React y Material-UI.",
-    imagen: "src/assets/img/pc.jpg",
+    imagen: "/img/pc.jpg",
     enlace: "https://www.vidrioschb.com.ar/",
   },
   {
     id: 4,
     titulo: "Portafolio Personal",
     descripcion: "Mi portafolio hecho con React y Material-UI.",
-    imagen: "src/assets/img/pc.jpg",
+    imagen: "/img/pc.jpg",
     enlace: "https://www.vidrioschb.com.ar/",
   }
 ];

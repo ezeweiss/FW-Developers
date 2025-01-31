@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import AboutUs from './components/AboutUs/AboutUs';
 import Contact from './components/Contact/Contact';
 import Home from './components/Home/Home';
 import Navbar from './components/NavBar/NavBar';
@@ -39,7 +38,6 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about-us" element={<AboutUs />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
