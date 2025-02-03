@@ -12,24 +12,41 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     // Validar campos
     if (!formData.name || !formData.email || !formData.message) {
       setError(true);
       return;
     }
-
+  
     setError(false);
     setSubmitted(true);
-
-    // Aquí puedes agregar la lógica para enviar los datos (por ejemplo, usar un backend o un servicio como EmailJS)
-    console.log('Formulario enviado:', formData);
-
-    // Reinicia el formulario
+  
+    // Enviar los datos al backend
+    try {
+      const response = await fetch('http://localhost:5000/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        console.log('Correo enviado con éxito');
+      } else {
+        console.log('Error al enviar el correo');
+      }
+    } catch (error) {
+      console.error('Hubo un error al enviar el correo:', error);
+    }
+  
+    // Reiniciar formulario
     setFormData({ name: '', email: '', message: '' });
   };
+  
 
   return (
     <Container maxWidth="sm">
@@ -63,6 +80,9 @@ const Contact = () => {
           name="name"
           value={formData.name}
           onChange={handleChange}
+          InputProps={{
+            style: { color: 'black' } // Cambiar el color del texto a negro
+          }}
           required
         />
         <TextField
@@ -73,6 +93,9 @@ const Contact = () => {
           value={formData.email}
           onChange={handleChange}
           type="email"
+          InputProps={{
+            style: { color: 'black' } // Cambiar el color del texto a negro
+          }}
           required
         />
         <TextField
@@ -84,6 +107,9 @@ const Contact = () => {
           onChange={handleChange}
           multiline
           rows={4}
+          InputProps={{
+            style: { color: 'black' } // Cambiar el color del texto a negro
+          }}
           required
         />
         <Button variant="contained" color="primary" type="submit" fullWidth>
