@@ -5,6 +5,7 @@ import Contact from './components/Contact/Contact';
 import Home from './components/Home/Home';
 import Navbar from './components/NavBar/NavBar';
 import Projects from './components/Projects/Projects';
+import './App.css';
 
 // Define tu tema personalizado aquí
 const theme = createTheme({
@@ -25,14 +26,25 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Roboto, Arial, sans-serif',
-  },
+    fontFamily: 'Inter, sans-serif',
+    h1: {
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: 'Montserrat, sans-serif',
+      fontWeight: 600,
+    },
+    body1: {
+      fontFamily: 'Inter, sans-serif',
+      fontSize: 16,
+    },
+  }
 });
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      {/* CssBaseline resetea estilos básicos */}
       <CssBaseline />
       <Router>
         <Navbar />

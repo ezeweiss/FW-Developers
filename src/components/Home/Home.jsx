@@ -4,12 +4,15 @@ import Typewriter from 'typewriter-effect';
 import Projects from '../Projects/Projects';
 import Contact from '../Contact/Contact';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import AboutUs from '../AboutUs/AboutUs';
+import imagenFondo from '/fondo.jpg';
 
 const Home = () => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   const scrollToSection = (id) => {
     const section = document.getElementById(id);
+    console.log(section)
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' });
     }
@@ -56,9 +59,26 @@ const Home = () => {
           alignItems: 'center',
           textAlign: 'center',
           padding: 4,
-          backgroundColor: '#212121', // Fondo oscuro para la sección de bienvenida
+          backgroundImage: `url(${imagenFondo})`, // Ruta de la imagen
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+          color: 'white',
+          position: 'relative',
         }}
       >
+        {/* Filtro oscuro para mejorar la legibilidad del texto */}
+      <Box
+        sx={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'rgba(0, 0, 0, 0.5)', // Filtro oscuro
+          zIndex: -1, // Asegura que el filtro quede por detrás del contenido
+        }}
+      />
         <Typography variant="h3" gutterBottom sx={{ animation: 'fadeIn 2s' }}>
           <Typewriter
             onInit={(typewriter) => {
@@ -96,6 +116,11 @@ const Home = () => {
           </Button>
         </Box>
       </Box>
+      
+      <Box id="nosotros">
+        <AboutUs sx={{paddingTop: '64px'}} />
+      </Box>
+      
 
       {/* Sección de Proyectos */}
       <Box
