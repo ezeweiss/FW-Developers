@@ -45,14 +45,22 @@ const Navbar = () => {
       <AppBar position="fixed" sx={{ bgcolor: "cornflowerblue" }}>
         <Toolbar sx={{ justifyContent: "space-between" }}>
           {/* Logo */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <img src={Logo} alt="Logo" width="150" height="50" />
+          <Box sx={{ display: "flex", alignItems: "center", cursor: "pointer"}}>
+            <img 
+              src={Logo}
+              alt="Logo"
+              width="150"
+              height="50"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
           </Box>
 
           {/* Menú en Desktop */}
           <Box sx={{ display: { xs: "none", md: "block" } }}>
             {menuItems.map((item) => (
-              <Button key={item.id} color="inherit" onClick={() => scrollToSection(item.id)}>
+              <Button key={item.id}  color="inherit" onClick={() => scrollToSection(item.id)}>
                 {item.label}
               </Button>
             ))}

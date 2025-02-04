@@ -1,11 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import Contact from './components/Contact/Contact';
 import Home from './components/Home/Home';
 import Navbar from './components/NavBar/NavBar';
-import Projects from './components/Projects/Projects';
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 // Define tu tema personalizado aquí
 const theme = createTheme({
@@ -46,14 +44,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Router>
+      <BrowserRouter>
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }

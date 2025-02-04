@@ -49,8 +49,8 @@ const Projects = () => {
   };
 
   return (
-    <Box sx={{ p: 4, backgroundColor: "#f4f4f4", minHeight: "100vh" }}>
-      <Grid container spacing={4} sx={{ justifyContent: "center" }}>
+    <Box sx={{ p: 4, backgroundColor: "#f4f4f4", minHeight: "auto" }}>
+      <Grid container spacing={4} sx={{ justifyContent: "center", flexGrow: 1 }}>
         {/* Primera columna */}
         <Grid item xs={12} sm={6} md={6} lg={6}>
           <Grid container spacing={4}>
